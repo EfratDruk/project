@@ -2,12 +2,13 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
  import {signIn} from '../services/userService.ts'
 import { UserData } from "../../models/UserData.ts";
 import { Man } from "@mui/icons-material";
+import MatchmakerList from "../../components/matchmakerList.tsx";
+import { BrowserRouter, Routes } from "react-router-dom";
 
 interface userState{
     user:any;
     error:string;
 }
-
 const initialState:userState={
     user:'',
     error: '',
@@ -16,34 +17,18 @@ const initialState:userState={
 export const fetchSignIn=createAsyncThunk<any>(
     'user/signIn',
     async (userData:any) =>{
-        const user=await signIn(userData.email)
-        const password=user.data.password
-        if(userData.password===password){
-            const type=user.data.type;
-            switch (type) {
-                case 0:
-                    // convert
-                    // send to right page               
-                    break;
-                case 1:
-                     // convert
-                    // send to right page                                                           
-                    break;
-                case 2:
-                    // convert
-                    // send to right page                                                               
-                        break;
-                default:
-                    break;
-            }
-            
-           return user; 
-        }
-        else{
-            console.log("wrong password");
-        }
+        const user=await signIn(userData.email)  
+        console.log(typeof(user));
+        switch (user.type) {
+            case 'Matchmaker':
+             
+                break;
         
-    }
+            default:
+                break;
+            }
+            return user; 
+        } 
 )
 
 const userSlice= createSlice({

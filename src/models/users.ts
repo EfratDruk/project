@@ -1,10 +1,10 @@
-import { Gender , Language, License,Status,Residence,Sector,Type_phon, Land, City} from "./enums"
+import { Gender , Language, License,Status,Residence,Sector,Type_phon, Land, City, Type} from "./enums"
 import { PhonesForInquiries } from "./phonesForInquiries"
 import { Siblings } from "./siblings"
 
 export  interface Users {
     id: number,
-    type: Type_phon,
+    type: Type,
     name: string,
     email: string,
     password: string,

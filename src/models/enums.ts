@@ -90,7 +90,7 @@ jerusalem='ירושלים',
     //  תל_אביב,חיפה,בני_ברק,רמת_גן,פתח_תקוה,אשדוד,ביתר
     }
 
-    export { StatusAdjustment, StatusMan,Beard,Smoking,Studies,Cover, License,Gender, Status, Residence, Sector,Language,Type_phon, Land, City }
+    export { StatusAdjustment,Type, StatusMan,Beard,Smoking,Studies,Cover, License,Gender, Status, Residence, Sector,Language,Type_phon, Land, City }
 
 
 
