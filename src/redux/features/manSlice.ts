@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import { Man } from "../../models/man";
 import { createMan, deleteMan, getMan, getManById, updateMan } from "../services/manService";
@@ -17,8 +17,8 @@ const initialState: ManState = {
 
 
 
-export const fetchMan = createAsyncThunk<Man[]>(
-    'man/fetchMan',
+export const fetchMen = createAsyncThunk<Man[]>(
+    'men/fetchMen',
     async () => {
         const men = await getMan();
         return men;
@@ -26,7 +26,7 @@ export const fetchMan = createAsyncThunk<Man[]>(
 )
 
 export const fetchManById = createAsyncThunk<Man, number>(
-    'man/fetchManById',
+    'men/fetchManById',
     async (id: number) => {
         const man = await getManById(id);
         return man;
@@ -34,14 +34,14 @@ export const fetchManById = createAsyncThunk<Man, number>(
 )
 
 export const createNewMan = createAsyncThunk(
-    'man/createMan',
+    'men/createMan',
     async (man: Man) => {
         return await createMan(man)
     }
 );
 
 export const updateExistingMan: any = createAsyncThunk(
-    'man/updateMan',
+    'men/updateMan',
     async (manUpdate: { id: number, man: Man }) => {
         return await updateMan(manUpdate.id, manUpdate.man)
     }
@@ -49,7 +49,7 @@ export const updateExistingMan: any = createAsyncThunk(
 
 
 export const deleteExistingMan = createAsyncThunk(
-    'man/deleteMan',
+    'men/deleteMan',
     async (id: number) => {
         await deleteMan(id);
         return id;
@@ -58,15 +58,19 @@ export const deleteExistingMan = createAsyncThunk(
 
 
 const manSlice = createSlice({
-    name: 'man',
+    name: 'men',
     initialState,
-    reducers: {},
+    reducers: {
+        updateUser:(state, action:PayloadAction<Man>)=>{
+            state.selectedMan=action.payload;
+        }
+    },
     extraReducers: (builder: { addCase: (arg0: any, arg1: { (atate: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; }) => void; }) => {
 
-        builder.addCase(fetchMan.fulfilled, (state: { men: any; }, action: { payload: any; }) => {
+        builder.addCase(fetchMen.fulfilled, (state: { men: any; }, action: { payload: any; }) => {
             state.men = action.payload;
         });
-        builder.addCase(fetchMan.rejected, (state: { error: any; }, action: { error: { message: string; }; }) => {
+        builder.addCase(fetchMen.rejected, (state: { error: any; }, action: { error: { message: string; }; }) => {
             state.error = action.error.message || 'failes to fetch man';
         });
         builder.addCase(fetchManById.fulfilled, (state: { selectedMan: any; }, action: { payload: any; }) => {
@@ -99,6 +103,7 @@ const manSlice = createSlice({
     }
 });
 
+export const {updateUser}=manSlice.actions;
 export default manSlice.reducer;
 
 

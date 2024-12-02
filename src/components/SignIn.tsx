@@ -15,29 +15,30 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { fetchSignIn } from '../redux/features/userSlice';
 import { UserData } from '../models/UserData';
 import { useDispatch } from 'react-redux';
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+//import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
-export default function SignInSide() {
-  //   const navigate=useNavigate();
+export default function SignIn() {
+  
+   const navigate=useNavigate();
   const dispatch = useDispatch();
   const handleSubmit = (event: any) => {
     event.preventDefault();//שלא ירדר כל הזמן ויתחיל לעשות את הקוד-חובה!!!!!
-    //בקשת AXIOS
     const data = new FormData(event.currentTarget);
     const userData = {
       email: data.get('email'),
       password: data.get('password')
     }
     console.log(userData);
-    dispatch(fetchSignIn(userData));
+    dispatch(fetchSignIn({userData, navigate}));
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Grid container component="main" sx={{ height: '77vh', overflow: 'hidden' }}>
+      <Grid container component="main" sx={{ height: '90vh', overflow: 'hidden' }}>
         <CssBaseline />
         <Grid
           item
@@ -45,7 +46,7 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            // backgroundImage: `url("../image/signin.jpg")`,
+            backgroundImage: `url("../img/suit-dress.jpg")`,
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
             backgroundSize: 'cover',
@@ -54,10 +55,10 @@ export default function SignInSide() {
             height: '100%',
           }}
         />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={6} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
-              my: 8,
+              my: 2,
               mx: 4,
               display: 'flex',
               flexDirection: 'column',

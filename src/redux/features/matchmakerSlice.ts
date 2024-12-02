@@ -21,8 +21,7 @@ export const fetchMatchmakers = createAsyncThunk<Matchmaker[]>(
     'matchmakers/fetchMatchmakers',
     async () => {
         const matchmakers = await getMatchmakers();
-        console.log("slice");
-        
+        console.log("slice");  
         return matchmakers;
     }
 )
