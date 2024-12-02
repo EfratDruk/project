@@ -60,11 +60,7 @@ export const deleteExistingMan = createAsyncThunk(
 const manSlice = createSlice({
     name: 'men',
     initialState,
-    reducers: {
-        updateUser:(state, action:PayloadAction<Man>)=>{
-            state.selectedMan=action.payload;
-        }
-    },
+    reducers: {},
     extraReducers: (builder: { addCase: (arg0: any, arg1: { (atate: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; }) => void; }) => {
 
         builder.addCase(fetchMen.fulfilled, (state: { men: any; }, action: { payload: any; }) => {
@@ -103,7 +99,6 @@ const manSlice = createSlice({
     }
 });
 
-export const {updateUser}=manSlice.actions;
 export default manSlice.reducer;
 
 

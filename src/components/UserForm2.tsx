@@ -9,7 +9,7 @@ import { height, styled } from '@mui/system';
 import { MenuItem, Select } from '@mui/material';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSignUp } from '../redux/features/userSlice';
+import { fetchSignUp, updateUser } from '../redux/features/userSlice';
 import { Users } from '../models/users';
 import { RootState } from '../store';
 
@@ -43,9 +43,8 @@ export default function UserForm2() {
   
 
 
-  const handleUpdate = () => {
-      
-    // dispatch()
+  const handleUpdate = () => {``    
+     dispatch(updateUser(formData));
   }
 
   const handleInputChange = (event: any) => {
@@ -58,7 +57,7 @@ export default function UserForm2() {
 
 
 
-  // console.log(formData);
+
 
   return (
     <Grid container spacing={3}>
@@ -238,6 +237,7 @@ export default function UserForm2() {
 
           value={formData.country}
           onChange={handleInputChange}  // פונקציה לעדכון הערך שנבחר   
+          onBlur={handleUpdate}
           required
           size="small"
           displayEmpty

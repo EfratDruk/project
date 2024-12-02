@@ -1,16 +1,16 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 import { Woman } from "../../models/woman";
-import { createWoman, deleteWoman, getWomanById, getWomen, updateWoman } from "../services/womanService";
+import { createWoman, deleteWoman, getWomanById, getWoman, updateWoman } from "../services/womanService";
 
 interface WomanState {
-    women: Woman[];
+    woman: Woman[];
     selectedWoman?: Woman;
     error: string;
 }
 
 const initialState: WomanState = {
-    women: [],
+    woman: [],
     selectedWoman: undefined,
     error: '',
 };
@@ -18,15 +18,15 @@ const initialState: WomanState = {
 
 
 export const fetchWoman = createAsyncThunk<Woman[]>(
-    'women/fetchWomen',
+    'woman/fetchWoman',
     async () => {
-        const women = await getWomen();
-        return women;
+        const woman = await getWoman();
+        return woman;
     }
 )
 
 export const fetchWomanById = createAsyncThunk<Woman, number>(
-    'women/fetchWomanById',
+    'woman/fetchWomanById',
     async (id: number) => {
         const woman = await getWomanById(id);
         return woman;
@@ -34,14 +34,14 @@ export const fetchWomanById = createAsyncThunk<Woman, number>(
 )
 
 export const createNewWoman = createAsyncThunk(
-    'women/createWoman',
+    'woman/createWoman',
     async (woman: Woman) => {
         return await createWoman(woman)
     }
 );
 
 export const updateExistingWoman: any= createAsyncThunk(
-    'women/updateWoman',
+    'woman/updateWoman',
     async (womanUpdate: { id: number, woman: Woman }) => {
         return await updateWoman(womanUpdate.id, womanUpdate.woman)
     }
@@ -49,7 +49,7 @@ export const updateExistingWoman: any= createAsyncThunk(
 
 
 export const deleteExistingWoman = createAsyncThunk(
-    'women/deleteWoman',
+    'woman/deleteWoman',
     async (id: number) => {
         await deleteWoman(id);
         return id;
@@ -58,13 +58,13 @@ export const deleteExistingWoman = createAsyncThunk(
 
 
 const womanSlice = createSlice({
-    name: 'women',
+    name: 'woman',
     initialState,
     reducers: {},
     extraReducers: (builder: { addCase: (arg0: any, arg1: { (atate: any, action: any): void; (state: any, action: any): void;  (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; (state: any, action: any): void; }) => void; }) => {
 
-        builder.addCase(fetchWoman.fulfilled, (state: { women: any; }, action: { payload: any; }) => {
-            state.women = action.payload;
+        builder.addCase(fetchWoman.fulfilled, (state: { woman: any; }, action: { payload: any; }) => {
+            state.woman = action.payload;
         });
         builder.addCase(fetchWoman.rejected, (state: { error: any; }, action: { error: { message: string; }; }) => {
             state.error = action.error.message || 'failes to fetch woman';
@@ -75,23 +75,23 @@ const womanSlice = createSlice({
         builder.addCase(fetchWomanById.rejected, (state: { error: any; }, action: { error: { message: string; }; }) => {
             state.error = action.error.message || 'Failed to fetch woman';
         });
-        builder.addCase(createNewWoman.fulfilled, (state: { women: any[]; }, action: { payload: any; }) => {
-            state.women.push(action.payload);
+        builder.addCase(createNewWoman.fulfilled, (state: { woman: any[]; }, action: { payload: any; }) => {
+            state.woman.push(action.payload);
         });
         builder.addCase(createNewWoman.rejected, (state: { error: any; }, action: { error: { message: string; }; }) => {
             state.error = action.error.message || 'faild to create new woman';
         });
-        builder.addCase(updateExistingWoman.fulfilled, (state:{women:any[]}, action: { payload: { id: number}; }) => {
-            const index = state.women.findIndex((w: { id: any; }) => w.id === action.payload.id);            
+        builder.addCase(updateExistingWoman.fulfilled, (state:{woman:any[]}, action: { payload: { id: number}; }) => {
+            const index = state.woman.findIndex((w: { id: any; }) => w.id === action.payload.id);            
             if (index !== -1) {
-                state.women[index] = action.payload;
+                state.woman[index] = action.payload;
             }
         });
         builder.addCase(updateExistingWoman.rejected, (state: { error: any }, action: { error: { message: String; }; }) => {
             state.error = action.error.message || 'failed to update woman'
         })
-        builder.addCase(deleteExistingWoman.fulfilled, (state: { women: any[]; }, action: { payload: any; }) => {
-            state.women = state.women.filter((w: { womanId: any }) => w.womanId !== action.payload);
+        builder.addCase(deleteExistingWoman.fulfilled, (state: { woman: any[]; }, action: { payload: any; }) => {
+            state.woman = state.woman.filter((w: { womanId: any }) => w.womanId !== action.payload);
         });
         builder.addCase(deleteExistingWoman.rejected, (state: { error: any; }, action: { error: { message: string; }; }) => {
             state.error = action.error.message || 'failed to delete woman'

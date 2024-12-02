@@ -1,5 +1,6 @@
 import axios from "axios";
 import { UserData } from "../../models/UserData";
+import { Users } from "../../models/users";
 
 
 axios.defaults.baseURL='http://localhost:8080/api'
@@ -12,7 +13,7 @@ export const signIn= async(email: String): Promise<any>=>{
     return response.data;
 }
 
-export const signUp=async(user:UserData):Promise<any>=>{
+export const signUp=async(user:Users):Promise<any>=>{
     // console.log("sign up-service");
     console.log("user in service ",user);
     const response=await axios.post('/users/createNewUser',user);

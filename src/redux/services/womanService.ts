@@ -3,7 +3,7 @@ import { Woman } from "../../models/woman";
 
 axios.defaults.baseURL = 'http://localhost:8080/api';
 
-export const getWomen = async (): Promise<Woman[]> => {
+export const getWoman = async (): Promise<Woman[]> => {
     const response = await axios.get('/woman/woman');
     return response.data;
 };
