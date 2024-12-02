@@ -27,7 +27,6 @@ export default function UserForm3() {
       parent_status:'',
 });
 const handleSave=()=>{
-dispatch(fetchSignUp(formData))
 }
 
 const handleInputChange=(event:any)=>{
@@ -103,38 +102,6 @@ const handleInputChange=(event:any)=>{
           placeholder=""
           autoComplete="motherOccupation"
           value={formData.motherOccupation} 
-          onChange={handleInputChange} 
-          required
-          size="small"
-        />
-      </FormGrid>
-      <FormGrid size={{ xs: 6 }}>
-        <FormLabel htmlFor="email" required>
-          Email
-        </FormLabel>
-        <OutlinedInput
-          id="email"
-          name="email"
-          type="email"
-          placeholder="exampel@gmail.com"
-          autoComplete="email"
-          value={formData.email} 
-          onChange={handleInputChange} 
-          required
-          size="small"
-        />
-      </FormGrid>
-      <FormGrid size={{ xs: 6 }}>
-        <FormLabel htmlFor="password" required>
-        Password
-        </FormLabel>
-        <OutlinedInput
-          id="password"
-          name="password"
-          type="password"
-          placeholder=""
-          autoComplete="password"
-          value={formData.password} 
           onChange={handleInputChange} 
           required
           size="small"

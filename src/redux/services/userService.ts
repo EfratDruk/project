@@ -13,7 +13,7 @@ export const signIn= async(email: String): Promise<any>=>{
 }
 
 export const signUp=async(user:UserData):Promise<any>=>{
-    console.log("sign up-service");
+    // console.log("sign up-service");
     console.log("user in service ",user);
     const response=await axios.post('/users/createNewUser',user);
     console.log(response.data, "signup response");

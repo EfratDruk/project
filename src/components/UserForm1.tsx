@@ -92,20 +92,6 @@ const handleInputChange=(event:any)=>{
           size="small"
         />
       </FormGrid>
-      {/* <FormGrid size={{ xs: 6 }}>
-        <FormLabel htmlFor="phon" required>
-          Phon number
-        </FormLabel>
-        <OutlinedInput
-          id="phon"
-          name="phon"
-          type="phon"
-          placeholder=""
-          autoComplete="phon"
-          required
-          size="small"
-        />
-      </FormGrid> */}
       <FormGrid size={{ xs: 6 }}>
         <FormLabel htmlFor="gender" required>
           Gender

@@ -7,7 +7,7 @@ import { BrowserRouter, Routes } from "react-router-dom";
 import { Users } from "../../models/users.ts";
 
 interface userState {
-    user?: Users;    
+    user?: UserData;    
     error: string;
 }
 const initialState: userState = {
@@ -55,10 +55,8 @@ export const fetchSignUp=createAsyncThunk<any,UserData>(
             console.log("done", userData);
             const user = await signUp(userData)
             return user;
-            console.log(userData);
         }catch(error){
             console.log("closed today");
-            
             console.log(error);
             
         }
